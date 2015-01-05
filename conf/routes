@@ -1,0 +1,32 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+module:testrunner
+
+GET     /                                       App.Index
+
+# 数字摘要算法
+GET     /digest/                                Digest.Index
+GET     /digest/:method                         Digest.DoDigest
+POST    /digest/:method                         Digest.DoDigest
+
+# 对称加密算法
+GET     /crypto/sym/:mode/:method               SymCrypto.DoCrypto
+POST    /crypto/sym/:mode/:method               SymCrypto.DoCrypto
+
+
+# 非对称加密算法
+GET     /crypto/asym/:mode/:method               AsymCrypto.DoCrypto
+POST    /crypto/asym/:mode/:method               AsymCrypto.DoCrypto
+
+
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/*filepath                       Static.Serve("public")
+
+# Catch all
+*       /:controller/:action                    :controller.:action
